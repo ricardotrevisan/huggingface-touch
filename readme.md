@@ -18,7 +18,7 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 
 
 ---
-## WSL Setup (RTX3080=Desktop)
+## WSL Setup (RTX3080=Desktop) : LLAMA 
 python3 -m venv .venv
 source .venv/bin/activate
 
