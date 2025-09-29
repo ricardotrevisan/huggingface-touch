@@ -52,6 +52,26 @@ cmake --build build --config Release -j
 ```
 
 Run:
+CLI
 ```
 ./build/bin/llama-run --ngl 32 ./model/Qwen_Qwen3-30B-A3B-Q4_K_S.gguf "Hello, who are you?"
+```
+
+Server (http://127.0.0.1:8080/):
+* Ollama port conflict
+```
+export GGML_USE_CUBLAS=1
+export GGML_USE_CLBLAST=0
+export GGML_USE_ACCELERATE=0
+./build/bin/llama-server --model ./model/Qwen_Qwen3-30B-A3B-Q4_K_S.gguf --port 11435 --ngl 32
+```
+curl GET:
+```
+curl -X POST http://127.0.0.1:11435/completions \
+  -H "Content-Type: application/json" \
+  -d '{
+        "model": "./model/Qwen_Qwen3-30B-A3B-Q4_K_S.gguf",
+        "prompt": "Hello, who are you?",
+        "max_tokens": 256
+      }'
 ```
